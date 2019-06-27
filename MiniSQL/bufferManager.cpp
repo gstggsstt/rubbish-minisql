@@ -56,9 +56,11 @@ void bufferManager::loadBlock(pair<string, int> blockName)
 
 void bufferManager::refreshBlock(pair<string, int> blockName)
 {
+	if (lastRefreshed == blockName) return;
     T.erase(M[blockName].second);
     M[blockName].second = ++currentStep;
     T[currentStep] = blockName;
+	lastRefreshed = blockName;
 }
 
 bufferManager::bufferManager(unsigned long buffer_Size, int deault_Buffer_Type) : fm()

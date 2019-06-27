@@ -135,31 +135,14 @@ string table::getData(pair<int, int> pos, string A, int x)
 		return "UNDEFINED";
 	auto it = AttrMap[A];
 	if (it.type == ATTR_TYPE_INT)
-	{
-		int temp = bm.getNumFromBlock<int>(fileName, pos.first, pos.second + AttrPos[it.name]);
-		ostringstream Cvt;
-		Cvt << temp;
-		return Cvt.str();
-	}
+		return to_string(bm.getNumFromBlock<int>(fileName, pos.first, pos.second + AttrPos[it.name]));
 	else if (it.type == ATTR_TYPE_FLOAT)
-	{
-		float temp = bm.getNumFromBlock<float>(fileName, pos.first, pos.second + AttrPos[it.name]);
-		ostringstream Cvt;
-		Cvt << temp;
-		return Cvt.str();
-	}
+		return to_string(bm.getNumFromBlock<float>(fileName, pos.first, pos.second + AttrPos[it.name]));
 	else if (it.type == ATTR_TYPE_DOUBLE)
-	{
-		double temp = bm.getNumFromBlock<double>(fileName, pos.first, pos.second + AttrPos[it.name]);
-		ostringstream Cvt;
-		Cvt << temp;
-		return Cvt.str();
-	}
+		return to_string(bm.getNumFromBlock<double>(fileName, pos.first, pos.second + AttrPos[it.name]));
 	else
-	{
 		return bm.getStrFromBlock(fileName, pos.first, pos.second + AttrPos[it.name],
 								  pos.second + AttrPos[it.name] + it.type);
-	}
 }
 
 map<string, string> table::getDataList(pair<int, int> pos)
@@ -168,6 +151,7 @@ map<string, string> table::getDataList(pair<int, int> pos)
 	for(int i=0;i<Attr.size();++i)
 	{
 		attribute it = Attr[i];
+		if (it.name[0] == '#') continue;
 		M[it.name] = getData(pos, it.name, i);
 	}
 	return M;

@@ -11,6 +11,7 @@ using namespace std;
 
 class catalogManager
 {
+	bool loadedFlag;
 	public:
 		const char* catalogFile = "catalog.txt";
 		bufferManager & bm; // reference variable
@@ -30,6 +31,6 @@ class catalogManager
 		// create index infor in catalog file
 		void giveAttrIndex(string tableName, string Attr, string idx);
 
-		catalogManager(bufferManager & bmbm) : bm(bmbm) {}
+		catalogManager(bufferManager & bmbm) : bm(bmbm), loadedFlag(false) {}
 };
 

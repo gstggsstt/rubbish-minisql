@@ -14,6 +14,7 @@ class bufferManager
 {
 protected:
 	fileManager fm;
+	pair<string, int> lastRefreshed;
 	int bufferUsed;
 
 	// This turns 
@@ -39,7 +40,7 @@ public:
 	// map<Tab, pair<FileName, BlockNumber>>
 	map<unsigned int, pair<string, int>> T;
 	// default bufferSize=256KB
-	bufferManager(unsigned long buffer_Size=1048576, int deault_Buffer_Type = BUFFER_TYPE_LRU);
+	bufferManager(unsigned long buffer_Size=131072, int deault_Buffer_Type = BUFFER_TYPE_LRU);
 	~bufferManager();
 
 	void flush();

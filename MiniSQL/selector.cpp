@@ -33,6 +33,7 @@ selector::RES selector::createIndex(string tableName, string Attr, string idx)
 			return r;
 		}
 		im.createIndex(cm.getTable(tableName), Attr, idx);
+		flush();
 	}
 	catch (string Excpt)
 	{
@@ -56,6 +57,7 @@ selector::RES selector::dropIndex(string idx)
 	{
 		im.dropIndex(idx);
 		dropFileList.push_back(idx + ".index");
+		flush();
 	}
 	catch (string Excpt)
 	{
@@ -139,6 +141,7 @@ selector::RES selector::createTable(string tableName, vector<attribute> Attr)
 		}
 		cm.createTable(tableName, Attr);
 		rm.createTableFile(cm.getTable(tableName));
+		flush();
 	}
 	catch (string Excpt)
 	{
@@ -173,6 +176,7 @@ selector::RES selector::dropTable(string tableName)
 			if (it.index != "*NULL*") dropFileList.push_back(it.index + ".index");
 		}
 		cm.dropTable(tableName);
+		flush();
 	}
 	catch (string Excpt)
 	{

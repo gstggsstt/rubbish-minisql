@@ -4,6 +4,7 @@
 
 void catalogManager::readInfo()
 {
+	if (loadedFlag) return;
 	dataStored.clear();
 	string s; char c;
 	FILE* fp; fopen_s(&fp,catalogFile, "r+");
@@ -16,10 +17,12 @@ void catalogManager::readInfo()
 		else break;
 	}
 	fclose(fp);
+	loadedFlag = true;
 }
 
 void catalogManager::writeInfo()
 {
+	loadedFlag = false;
 	FILE* fp;
 	fopen_s(&fp,catalogFile, "w+");
 	for (int i = 0; i < dataStored.size(); i++)

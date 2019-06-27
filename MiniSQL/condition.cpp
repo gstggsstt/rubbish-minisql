@@ -86,11 +86,11 @@ int conditionChecker::evaluate(string tokens)
 
 int conditionChecker::getType(string str)
 {
-	if (regex_match(str.begin(), str.end(), regex("\'(\\s|\\S)*\'")))
+	if (regex_match(str.begin(), str.end(), regex("^\'.*\'$")))
 		return (int)str.length() - 2;
-	if (regex_match(str.begin(), str.end(), regex("[+-]?\\d+\\.\\d+")))
+	if (regex_match(str.begin(), str.end(), regex("^[+-]?\\d+\\.\\d+$")))
 		return -2;
-	if (regex_match(str.begin(), str.end(), regex("[+-]?\\d+")))
+	if (regex_match(str.begin(), str.end(), regex("^[+-]?\\d+$")))
 		return 0;
 
 	throw string("Can't determin the datatype of \""+str+"\" (check single quotation arround string).");

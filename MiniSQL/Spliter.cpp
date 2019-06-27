@@ -105,7 +105,7 @@ string Spliter::getUntilWord()
 {
 	string temp;
 	while (cur < str.length() &&
-		(str[cur] >= 'A' && str[cur] <= 'Z' ||
+		!(str[cur] >= 'A' && str[cur] <= 'Z' ||
 			str[cur] >= 'a' && str[cur] <= 'z' ||
 			str[cur] >= '0' && str[cur] <= '9' ||
 			str[cur] == '_' || str[cur] == '.' ||

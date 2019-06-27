@@ -252,6 +252,7 @@ map<string, vector<string>> interpreter::execute(string cmd, int printOrNot)
 				{
 					string str1, str2, str3;
 					str1 = tempSp.getWord();
+					if (str1 == "") break;
 					if (str1 == "or" || str1 == "and")
 					{
 						if (str1 == "and") lC.back().op += "A";
@@ -444,6 +445,7 @@ map<string, vector<string>> interpreter::execute(string cmd, int printOrNot)
 	}
 	cerr << "Syntax error: unknown command." << endl;
 	res["#Error"].push_back("Unknown command.");
+	flush();
 	return res;
 }
 
