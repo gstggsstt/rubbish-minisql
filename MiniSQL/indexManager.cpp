@@ -236,16 +236,16 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			else if (type == ATTR_TYPE_FLOAT)
 			{
 				vector<PII> vec;
-				auto L = IDXfloat[make_pair(T.name, cond.first[0].val1)].lower_bound((float)stof(cond.first[0].val2)-EPS);
-				auto R = IDXfloat[make_pair(T.name, cond.first[0].val1)].upper_bound((float)stof(cond.first[0].val2)+EPS);
+				auto L = IDXfloat[make_pair(T.name, cond.first[0].val1)].lower_bound((float)stof(cond.first[0].val2)*(1-EPS));
+				auto R = IDXfloat[make_pair(T.name, cond.first[0].val1)].upper_bound((float)stof(cond.first[0].val2)*(1+EPS));
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
 			}
 			else if (type == ATTR_TYPE_DOUBLE)
 			{
 				vector<PII> vec;
-				auto L = IDXdouble[make_pair(T.name, cond.first[0].val1)].lower_bound(stof(cond.first[0].val2)-EPS);
-				auto R = IDXdouble[make_pair(T.name, cond.first[0].val1)].upper_bound(stof(cond.first[0].val2)+EPS);
+				auto L = IDXdouble[make_pair(T.name, cond.first[0].val1)].lower_bound(stof(cond.first[0].val2)*(1-EPS));
+				auto R = IDXdouble[make_pair(T.name, cond.first[0].val1)].upper_bound(stof(cond.first[0].val2)*(1+EPS));
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
 			}
@@ -270,7 +270,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			{
 				vector<PII> vec;
 				auto L = IDXfloat[make_pair(T.name, cond.first[0].val1)].begin();
-				auto R = IDXfloat[make_pair(T.name, cond.first[0].val1)].lower_bound((float)stof(cond.first[0].val2)+EPS);
+				auto R = IDXfloat[make_pair(T.name, cond.first[0].val1)].lower_bound((float)stof(cond.first[0].val2)*(1-EPS));
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
 			}
@@ -278,7 +278,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			{
 				vector<PII> vec;
 				auto L = IDXdouble[make_pair(T.name, cond.first[0].val1)].begin();
-				auto R = IDXdouble[make_pair(T.name, cond.first[0].val1)].lower_bound(stof(cond.first[0].val2)+EPS);
+				auto R = IDXdouble[make_pair(T.name, cond.first[0].val1)].lower_bound(stof(cond.first[0].val2)*(1-EPS));
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
 			}
@@ -303,7 +303,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			{
 				vector<PII> vec;
 				auto L = IDXfloat[make_pair(T.name, cond.first[0].val1)].begin();
-				auto R = IDXfloat[make_pair(T.name, cond.first[0].val1)].upper_bound((float)stof(cond.first[0].val2)+EPS);
+				auto R = IDXfloat[make_pair(T.name, cond.first[0].val1)].upper_bound((float)stof(cond.first[0].val2)*(1+EPS));
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
 			}
@@ -311,7 +311,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			{
 				vector<PII> vec;
 				auto L = IDXdouble[make_pair(T.name, cond.first[0].val1)].begin();
-				auto R = IDXdouble[make_pair(T.name, cond.first[0].val1)].upper_bound(stof(cond.first[0].val2)+EPS);
+				auto R = IDXdouble[make_pair(T.name, cond.first[0].val1)].upper_bound(stof(cond.first[0].val2)*(1+EPS));
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
 			}
@@ -335,7 +335,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			else if (type == ATTR_TYPE_FLOAT)
 			{
 				vector<PII> vec;
-				auto L = IDXfloat[make_pair(T.name, cond.first[0].val1)].upper_bound((float)stof(cond.first[0].val2)-EPS);
+				auto L = IDXfloat[make_pair(T.name, cond.first[0].val1)].upper_bound((float)stof(cond.first[0].val2)*(1+EPS));
 				auto R = IDXfloat[make_pair(T.name, cond.first[0].val1)].end();
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
@@ -343,7 +343,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			else if (type == ATTR_TYPE_DOUBLE)
 			{
 				vector<PII> vec;
-				auto L = IDXdouble[make_pair(T.name, cond.first[0].val1)].upper_bound(stof(cond.first[0].val2)-EPS);
+				auto L = IDXdouble[make_pair(T.name, cond.first[0].val1)].upper_bound(stof(cond.first[0].val2)*(1+EPS));
 				auto R = IDXdouble[make_pair(T.name, cond.first[0].val1)].end();
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
@@ -360,7 +360,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			if (type == ATTR_TYPE_INT)
 			{
 				vector<PII> vec;
-				auto L = IDXint[make_pair(T.name, cond.first[0].val1)].lower_bound(stoi(cond.first[0].val2)-EPS);
+				auto L = IDXint[make_pair(T.name, cond.first[0].val1)].lower_bound(stoi(cond.first[0].val2));
 				auto R = IDXint[make_pair(T.name, cond.first[0].val1)].end();
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
@@ -368,7 +368,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			else if (type == ATTR_TYPE_FLOAT)
 			{
 				vector<PII> vec;
-				auto L = IDXfloat[make_pair(T.name, cond.first[0].val1)].lower_bound((float)stof(cond.first[0].val2)-EPS);
+				auto L = IDXfloat[make_pair(T.name, cond.first[0].val1)].lower_bound((float)stof(cond.first[0].val2)*(1-EPS));
 				auto R = IDXfloat[make_pair(T.name, cond.first[0].val1)].end();
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
@@ -376,7 +376,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			else if (type == ATTR_TYPE_DOUBLE)
 			{
 				vector<PII> vec;
-				auto L = IDXdouble[make_pair(T.name, cond.first[0].val1)].lower_bound(stof(cond.first[0].val2)-EPS);
+				auto L = IDXdouble[make_pair(T.name, cond.first[0].val1)].lower_bound(stof(cond.first[0].val2)*(1-EPS));
 				auto R = IDXdouble[make_pair(T.name, cond.first[0].val1)].end();
 				for(auto it=L;it!=R;++it) vec.push_back((*it).second);
 				return vec;
@@ -403,7 +403,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			{
 				vector<PII> vec;
 				for (auto it : IDXfloat[make_pair(T.name, cond.first[0].val1)])
-					if (fabs(it.first - (float)stof(cond.first[0].val2)) < EPS)
+					if (fabs(it.first - (float)stof(cond.first[0].val2)) < (it.first + (float)stof(cond.first[0].val2))*EPS)
 						vec.push_back(it.second);
 				return vec;
 			}
@@ -411,7 +411,7 @@ vector<indexManager::PII> indexManager::selectPosById(table &T, condition &cond)
 			{
 				vector<PII> vec;
 				for (auto it : IDXdouble[make_pair(T.name, cond.first[0].val1)])
-					if (fabs(it.first - stof(cond.first[0].val2)) < EPS)
+					if (fabs(it.first - stof(cond.first[0].val2)) < (it.first + stof(cond.first[0].val2))*EPS)
 						vec.push_back(it.second);
 				return vec;
 			}
@@ -454,13 +454,13 @@ vector<indexManager::PII> indexManager::selectPosById_Range(table &T, condition 
 		auto L = IDXfloat[make_pair(T.name, cond.first[0].val1)].begin();
 		auto R = IDXfloat[make_pair(T.name, cond.first[0].val1)].end();
 		if (cond.first[0].op == ">")
-			L = IDXfloat[make_pair(T.name, cond.first[0].val1)].upper_bound((float)stof(cond.first[0].val2)-EPS);
+			L = IDXfloat[make_pair(T.name, cond.first[0].val1)].upper_bound((float)stof(cond.first[0].val2)*(1+EPS));
 		if (cond.first[0].op == ">=")
-			L = IDXfloat[make_pair(T.name, cond.first[0].val1)].lower_bound((float)stof(cond.first[0].val2)-EPS);
+			L = IDXfloat[make_pair(T.name, cond.first[0].val1)].lower_bound((float)stof(cond.first[0].val2)*(1-EPS));
 		if (cond.first[1].op == "<")
-			R = IDXfloat[make_pair(T.name, cond.first[1].val1)].lower_bound((float)stof(cond.first[1].val2)+EPS);
+			R = IDXfloat[make_pair(T.name, cond.first[1].val1)].lower_bound((float)stof(cond.first[1].val2)*(1-EPS));
 		if (cond.first[1].op == "<=")
-			R = IDXfloat[make_pair(T.name, cond.first[1].val1)].upper_bound((float)stof(cond.first[1].val2)+EPS);
+			R = IDXfloat[make_pair(T.name, cond.first[1].val1)].upper_bound((float)stof(cond.first[1].val2)*(1+EPS));
 		for (auto it = L; it != R; ++it)
 			vec.push_back(it->second);
 		return vec;
@@ -471,13 +471,13 @@ vector<indexManager::PII> indexManager::selectPosById_Range(table &T, condition 
 		auto L = IDXdouble[make_pair(T.name, cond.first[0].val1)].begin();
 		auto R = IDXdouble[make_pair(T.name, cond.first[0].val1)].end();
 		if (cond.first[0].op == ">")
-			L = IDXdouble[make_pair(T.name, cond.first[0].val1)].upper_bound(stof(cond.first[0].val2)-EPS);
+			L = IDXdouble[make_pair(T.name, cond.first[0].val1)].upper_bound(stof(cond.first[0].val2)*(1+EPS));
 		if (cond.first[0].op == ">=")
-			L = IDXdouble[make_pair(T.name, cond.first[0].val1)].lower_bound(stof(cond.first[0].val2)-EPS);
+			L = IDXdouble[make_pair(T.name, cond.first[0].val1)].lower_bound(stof(cond.first[0].val2)*(1-EPS));
 		if (cond.first[1].op == "<")
-			R = IDXdouble[make_pair(T.name, cond.first[1].val1)].lower_bound(stof(cond.first[1].val2)+EPS);
+			R = IDXdouble[make_pair(T.name, cond.first[1].val1)].lower_bound(stof(cond.first[1].val2)*(1-EPS));
 		if (cond.first[1].op == "<=")
-			R = IDXdouble[make_pair(T.name, cond.first[1].val1)].upper_bound(stof(cond.first[1].val2)+EPS);
+			R = IDXdouble[make_pair(T.name, cond.first[1].val1)].upper_bound(stof(cond.first[1].val2)*(1+EPS));
 		for (auto it = L; it != R; ++it)
 			vec.push_back(it->second);
 		return vec;

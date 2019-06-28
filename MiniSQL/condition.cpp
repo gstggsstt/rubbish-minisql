@@ -114,11 +114,11 @@ bool conditionChecker::check(table &T, record res, condition &cond)
 		if ((t1 <= 0) != (t2 <= 0))
 			throw string("Comparison between different datatype.");
 		if (t1 > 0 && t2 > 0)
-			vec.push_back(comp(v1, v2, it.op));
+			vec.push_back(compWithoutEps(v1, v2, it.op));
 		else if (t1 < 0 || t2 < 0)
-			vec.push_back(comp(atof(v1.c_str()), atof(v2.c_str()), it.op));
+			vec.push_back(compWithEps(atof(v1.c_str()), atof(v2.c_str()), it.op));
 		else
-			vec.push_back(comp(atoi(v1.c_str()), atoi(v2.c_str()), it.op));
+			vec.push_back(compWithoutEps(atoi(v1.c_str()), atoi(v2.c_str()), it.op));
 	}
 	string expr;
 	for (int i = 0; i < (int)vec.size(); ++i)

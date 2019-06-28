@@ -31,6 +31,8 @@ public:
 typedef pair<vector<valueComparison>,vector<logicalComparison> > condition;
 typedef map<string,string> record;
 
+const double EPS = 1e-6;
+
 class conditionChecker
 {
 	int precedence(char op);
@@ -50,7 +52,7 @@ class conditionChecker
 	bool check(table & T, record res, condition & cond);
 
 	template<typename _tp1,typename _tp2>
-	bool comp(_tp1 v1, _tp2 v2, string op)
+	bool compWithoutEps(_tp1 v1, _tp2 v2, string op)
 	{
 		if(op=="=" || op=="==") return v1==v2;
 		if(op=="<") return v1<v2;
@@ -58,6 +60,17 @@ class conditionChecker
 		if(op=="<=") return v1<=v2;
 		if(op==">=") return v1>=v2;
 		if(op=="<>" || op=="!=") return v1!=v2;
+		throw string("Unknown operator \""+op+"\".");
+	}
+	template<typename _tp1,typename _tp2>
+	bool compWithEps(_tp1 v1, _tp2 v2, string op)
+	{
+		if(op=="=" || op=="==") return fabs(v1-v2)<(v1+v2)*EPS;
+		if(op=="<") return v1<v2-v2*EPS;
+		if(op==">") return v1>v2+v2*EPS;
+		if(op=="<=") return v1<=v2+v2*EPS;
+		if(op==">=") return v1>=v2-v2*EPS;
+		if(op=="<>" || op=="!=") return fabs(v1-v2)>(v1+v2)*EPS;
 		throw string("Unknown operator \""+op+"\".");
 	}
 };
